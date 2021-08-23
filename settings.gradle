@@ -1,0 +1,2 @@
+rootProject.name = "StatusLightDemo_I4"
+include ':app'
