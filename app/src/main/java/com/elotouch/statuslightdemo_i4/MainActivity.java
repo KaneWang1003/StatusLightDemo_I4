@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox checkBox_Exled_buttom ;
     private CheckBox checkBox_Exled_top ;
 
-    private final static int portsMask_left = ExtLed.MASK_USB_PORT5;
-    private final static int portsMask_right = ExtLed.MASK_USB_PORT3;
+    private final static int portsMask_left = ExtLed.MASK_USB_PORT3;
+    private final static int portsMask_right = ExtLed.MASK_USB_PORT5;
     private final static int portsMask_top = ExtLed.MASK_USB_PORT4;
     private final static int portsMask_buttom = ExtLed.MASK_USB_PORT6;
 
