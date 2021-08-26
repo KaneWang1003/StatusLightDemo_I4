@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox checkBox_Exled_buttom ;
     private CheckBox checkBox_Exled_top ;
 
-    private final static int portsMask_left = ExtLed.MASK_USB_PORT5;
-    private final static int portsMask_right = ExtLed.MASK_USB_PORT3;
+    private final static int portsMask_left = ExtLed.MASK_USB_PORT3;
+    private final static int portsMask_right = ExtLed.MASK_USB_PORT5;
     private final static int portsMask_top = ExtLed.MASK_USB_PORT4;
     private final static int portsMask_buttom = ExtLed.MASK_USB_PORT6;
 
@@ -46,13 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
         init_Exled();
 
-        findViewById(R.id.button_on).setOnClickListener(v -> {power = ExtLed.PORT_STATUS_ON;updateStatus(port, power, color);});
+        findViewById(R.id.button_on).setOnClickListener(v -> {getSelectedExledPort();power = ExtLed.PORT_STATUS_ON;updateStatus(port, power, color);});
 
-        findViewById(R.id.button_off).setOnClickListener(v -> {power = ExtLed.PORT_STATUS_OFF; updateStatus(port, power, color);});
+        findViewById(R.id.button_off).setOnClickListener(v -> {getSelectedExledPort();power = ExtLed.PORT_STATUS_OFF; updateStatus(port, power, color);});
 
-        findViewById(R.id.button_red).setOnClickListener(v -> { color = ExtLed.EXT_LED_COLOR_RED; updateStatus(port, power, color);});
+        findViewById(R.id.button_red).setOnClickListener(v -> { color = ExtLed.EXT_LED_COLOR_RED; getSelectedExledPort(); updateStatus(port, power, color);});
 
-        findViewById(R.id.button_green).setOnClickListener(v -> {color = ExtLed.EXT_LED_COLOR_GREEN; updateStatus(port, power, color);});
+        findViewById(R.id.button_green).setOnClickListener(v -> {color = ExtLed.EXT_LED_COLOR_GREEN; getSelectedExledPort();updateStatus(port, power, color);});
 
         checkBox_Exled_buttom.setOnClickListener(v -> getSelectedExledPort());
         checkBox_Exled_left.setOnClickListener(v -> getSelectedExledPort());
@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateStatus(int port, int power_status, int color) {
-        extLed.setPower(port, power_status == 0 ? power_status :port | power_status, null);
+        Log.d(TAG , "update Port: " + port  + " power: " + power + " color: " + color);
+        extLed.setPower(port, power_status == 0 ? power_status | power_status:port , null);
         extLed.setColor(port, color);
     }
 
