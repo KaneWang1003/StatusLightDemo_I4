@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         init_Exled();
 
-        findViewById(R.id.button_on).setOnClickListener(v -> {getSelectedExledPort();power = ExtLed.PORT_STATUS_ON;updateStatus(port, power, color);});
+        findViewById(R.id.button_on).setOnClickListener(v -> {getSelectedExledPort();power =ExtLed.PORT_STATUS_ON;updateStatus(port, power, color);});
 
         findViewById(R.id.button_off).setOnClickListener(v -> {getSelectedExledPort();power = ExtLed.PORT_STATUS_OFF; updateStatus(port, power, color);});
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateStatus(int port, int power_status, int color) {
         Log.d(TAG , "update Port: " + port  + " power: " + power + " color: " + color);
-        extLed.setPower(port, power_status == 0 ? power_status | power_status:port , null);
+        extLed.setPower(port, power_status == 0 ? power_status: port , null);
         extLed.setColor(port, color);
     }
 
