@@ -13,11 +13,11 @@
 
 -----
 
-+ ###I Series2.0/3.0
++ ### I Series2.0/3.0
 
 ![portAssignment for AAIO2.0/3.0](I2.jpg)
 
-+ ###I Series4.0
++ ### I Series4.0
 
-![portAssignment for AAIO4.0](I4.jpg)
+![portAssignment for AAIO4.0](I4.png)
 
