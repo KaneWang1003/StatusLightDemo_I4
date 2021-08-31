@@ -1,4 +1,4 @@
-package com.elotouch.statuslightdemo_i4;
+package com.elotouch.statuslightdemo_E466847;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,5 +1,6 @@
-package com.elotouch.statuslightdemo_i4;
+package com.elotouch.statuslightdemo_E466847;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.CheckBox;
@@ -17,15 +18,15 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox checkBox_Exled_buttom ;
     private CheckBox checkBox_Exled_top ;
 
-    private final static int portsMask_left = ExtLed.MASK_USB_PORT3;
-    private final static int portsMask_right = ExtLed.MASK_USB_PORT5;
-    private final static int portsMask_top = ExtLed.MASK_USB_PORT4;
-    private final static int portsMask_buttom = ExtLed.MASK_USB_PORT6;
+    private   int portsMask_left ;
+    private   int portsMask_right ;
+    private   int portsMask_top ;
+    private   int portsMask_buttom ;
 
     private ExtLed extLed;
 
     //set Default
-    private int power = ExtLed.PORT_STATUS_OFF;
+    private int power = ExtLed.PORT_STATUS_ON;
     private int color = ExtLed.EXT_LED_COLOR_RED;
     private int port = portsMask_right| portsMask_left;
 
@@ -34,6 +35,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (Build.MODEL.equals("Elo-i2-10Std")
+                || Build.MODEL.equals("Elo-i2-15Std")
+                || Build.MODEL.equals("Elo-i2-22Std")) {
+             portsMask_left = ExtLed.MASK_USB_PORT2;
+             portsMask_right = ExtLed.MASK_USB_PORT4;
+             portsMask_top = ExtLed.MASK_USB_PORT3;
+             portsMask_buttom = ExtLed.MASK_USB_PORT5;
+        } else {
+
+             portsMask_left = ExtLed.MASK_USB_PORT3;
+             portsMask_right = ExtLed.MASK_USB_PORT5;
+             portsMask_top = ExtLed.MASK_USB_PORT4;
+             portsMask_buttom = ExtLed.MASK_USB_PORT6;
+        }
 
         checkBox_Exled_left = findViewById(R.id.checkbox_Exled_left);
         checkBox_Exled_right = findViewById(R.id.checkBox_Exled_right);
@@ -46,13 +62,13 @@ public class MainActivity extends AppCompatActivity {
 
         init_Exled();
 
-        findViewById(R.id.button_on).setOnClickListener(v -> {getSelectedExledPort();power =ExtLed.PORT_STATUS_ON;updateStatus(port, power, color);});
+        findViewById(R.id.button_on).setOnClickListener(v -> {getSelectedExledPort();power =ExtLed.PORT_STATUS_ON;setPower(port, power);});
 
-        findViewById(R.id.button_off).setOnClickListener(v -> {getSelectedExledPort();power = ExtLed.PORT_STATUS_OFF; updateStatus(port, power, color);});
+        findViewById(R.id.button_off).setOnClickListener(v -> {getSelectedExledPort();power = ExtLed.PORT_STATUS_OFF; setPower(port, power);});
 
-        findViewById(R.id.button_red).setOnClickListener(v -> { color = ExtLed.EXT_LED_COLOR_RED; getSelectedExledPort(); updateStatus(port, power, color);});
+        findViewById(R.id.button_red).setOnClickListener(v -> { color = ExtLed.EXT_LED_COLOR_RED; getSelectedExledPort(); setColor(port, color);});
 
-        findViewById(R.id.button_green).setOnClickListener(v -> {color = ExtLed.EXT_LED_COLOR_GREEN; getSelectedExledPort();updateStatus(port, power, color);});
+        findViewById(R.id.button_green).setOnClickListener(v -> {color = ExtLed.EXT_LED_COLOR_GREEN; getSelectedExledPort();setColor(port, color);});
 
         checkBox_Exled_buttom.setOnClickListener(v -> getSelectedExledPort());
         checkBox_Exled_left.setOnClickListener(v -> getSelectedExledPort());
@@ -69,13 +85,20 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void updateStatus(int port, int power_status, int color) {
-        Log.d(TAG , "update Port: " + port  + " power: " + power + " color: " + color);
+    private void setPower(int port, int power_status) {
+        Log.d(TAG , "update power--------- port: " + port  + " power: " + power );
         extLed.setPower(port, power_status == 0 ? power_status: port , null);
+
+    }
+
+    private void setColor(int port, int color) {
+        Log.d(TAG , "update Color--------port: " + port  + "  color: " + color);
         extLed.setColor(port, color);
     }
 
+
     private void  init_Exled(){
+
 
         extLed = new EloPeripheralManager(this, null).getExtLedCtl();
 
@@ -90,7 +113,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        updateStatus(port, power, color);
+        setPower(port, power);
+        setColor(port, color);
+
     }
 
     private int getSelectedExledPort() {

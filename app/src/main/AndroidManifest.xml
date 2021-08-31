@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.elotouch.statuslightdemo_i4">
+    package="com.elotouch.statuslightdemo_E466847">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StatusLightDemo_I4">
-        <activity android:name=".MainActivity"
+        <activity android:name="com.elotouch.statuslightdemo_E466847.MainActivity"
             android:configChanges="orientation|keyboardHidden|navigation|screenSize|touchscreen|keyboard">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

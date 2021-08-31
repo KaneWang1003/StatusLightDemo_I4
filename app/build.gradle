@@ -7,8 +7,8 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.elotouch.statuslightdemo_i4"
-        minSdkVersion 29
+        applicationId "com.elotouch.statuslightdemo_E466847"
+        minSdkVersion 25
         targetSdkVersion 30
         versionCode 4
         versionName "1.4"
